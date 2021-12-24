@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'user-management';
+  articleTitle = 'user-management（用户管理）';
+  fileType = "word"
+  public arr = `fkldjfkdf<br>`
+  constructor(){
+    this.arr += `fjkdjfkjfksf`
+  }
 }

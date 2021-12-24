@@ -1,0 +1,12 @@
+<h2>我的用户</h2>
+<!-- 用户列表 -->
+<ul class="users">
+  <li *ngFor="let user of users">
+    <a routerLink="/detail/{{user.id}}">
+      <span class="badge">{{user.id}}</span> {{user.name}}
+    </a>
+    <!-- <button class="delete" title="delete user">x</button> -->
+  </li>
+</ul>
+<!-- 用户详情 -->
+<app-user-detail></app-user-detail>
