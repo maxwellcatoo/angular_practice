@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message.service'
+import {MessageService} from '../message.service'
 
 @Component({
   selector: 'app-messages',
@@ -7,11 +7,25 @@ import { MessageService } from '../message.service'
   styleUrls: ['./messages.component.scss']
 })
 export class MessagesComponent implements OnInit {
-  // 自己的html中要用，所以用public定义单例
+
   constructor(public messageService: MessageService) { }
 
+  public messages?: String[];
   ngOnInit(): void {
-    console.log(this.messageService)
+    this.getMessages()
+  }
+  
+  getMessages(){
+    // this.messages = this.messageService.messages
+    this.messageService.getMessages().subscribe(msg => {this.messages = msg as String[]})
   }
 
+  addMessage(){
+    let msg = (new Date()).toLocaleDateString()
+    this.messageService.add(msg)
+  }
+
+  clearMessage(){
+    this.messageService.clear()
+  }
 }

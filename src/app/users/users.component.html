@@ -1,12 +1,12 @@
-<h2>我的用户</h2>
-<!-- 用户列表 -->
-<ul class="users">
-  <li *ngFor="let user of users">
-    <a routerLink="/detail/{{user.id}}">
-      <span class="badge">{{user.id}}</span> {{user.name}}
-    </a>
-    <!-- <button class="delete" title="delete user">x</button> -->
-  </li>
-</ul>
-<!-- 用户详情 -->
-<app-user-detail></app-user-detail>
+<div>
+  <div>用户列表</div>
+  <!-- 循环列表 -->
+  <ul>
+    <li class="listyle" [class.selected]="selectedItem === item" *ngFor="let item of users" (click)="onSelectItem(item)" [routerLink]="['detail',item.id]">
+      <span>{{item.id}}</span><span>&nbsp;&nbsp;&nbsp;</span><span>{{item.name}}</span>
+    </li>
+  </ul>
+
+  <!-- 展示单个 -->
+  <!-- <app-user-detail [user]="selectedItem"></app-user-detail> -->
+</div>

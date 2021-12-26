@@ -1,15 +1,14 @@
 
-
 <h1>{{articleTitle}}</h1>
-<nav><a routerLink="/users">Users</a></nav>
-<nav><a routerLink="/dashboard">dashboard</a></nav>
 
-<div *ngIf="fileType !== 'word'; else block">初始</div>
-<!-- <ng-template #thenBlock>看啥</ng-template> -->
-<ng-template #block [innerHTML]="arr"></ng-template>
-
-<h2>
-  <router-outlet></router-outlet>
-</h2>
+<app-users></app-users>
 
 <app-messages></app-messages>
+<br>
+<br>
+<br>
+
+<nav [routerLink]="['about']"><button>关于</button></nav>
+<nav [routerLink]="['detail']"><button>查看用户详情</button></nav>
+
+<router-outlet></router-outlet>

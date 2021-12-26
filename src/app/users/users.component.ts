@@ -1,25 +1,27 @@
-import { Component, OnInit } from '@angular/core'
-import { User } from '../class-mock/user'
-import { USERS } from '../class-mock/mock-users'
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service'
+import {User} from '../class-mock/user'
+
 @Component({
-  selector: 'app-user',
+  selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-
 export class UsersComponent implements OnInit {
-  users?: User[];
   constructor(private userService: UserService) { }
+  public users?: User[];
 
-  // 生命周期钩子函数
+  public selectedItem?: User;
+
   ngOnInit(): void {
     this.getUsers()
   }
 
-  getUsers(): void {
-    // this.userService.getUsers()
-    this.users = USERS
+  getUsers(){
+    this.userService.getUsers().subscribe(users => { this.users = users;})
   }
 
+  onSelectItem(item:User){
+    this.selectedItem = item
+  }
 }

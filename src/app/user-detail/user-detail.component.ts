@@ -1,24 +1,44 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-import { User } from '../class-mock/user'
+import { Component, Input, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import { Location } from '@angular/common';
+import {UserService} from '../user.service'
+import {User} from '../class-mock/user'
 
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
   styleUrls: ['./user-detail.component.scss']
 })
-
-
 export class UserDetailComponent implements OnInit {
-  user: User = { id: 0, name: '' }
-
   constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private userService: UserService
   ) { }
+  public user?: User;
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.user = {id:12,name: '哈哈哈'}
-    }, 3000);
+    this.getUser()
   }
 
+  getUser(){
+    this.location
+    const id = this.route.snapshot.paramMap.get('id');
+    if(id){
+      this.userService.getUser(parseInt(id)).subscribe(user => {this.user = user})
+    }else{
+      this.user = undefined
+    }
+  }
+
+  goBack(){
+    this.location.back()
+  }
+  save(): void{
+    if(this.user){
+      this.userService.updateUser(this.user).subscribe(() => this.goBack())
+    }else{
+      
+    }
+  }
 }
